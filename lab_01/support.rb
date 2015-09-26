@@ -18,15 +18,35 @@ class String
       total += candidate.size
 
       if candidate == word
-        distances << (distances.empty? ? total : total -  distances.last)
+        distances << (distances.empty? ? total : total - distances.last)
       end
     end
 
-    distances
+    distances[1..-1]
   end
 
-  def cryptogram
-    chomp.downcase.gsub(/[^a-z]/i, '')
+  def letters_only
+    @letters_only ||= chomp.downcase.gsub(/[^a-z]/i, '')
+  end
+
+  def words_only
+    @words_only ||= chomp.downcase.gsub(/[^a-z ]/i, '')
+  end
+
+  def group_multiples(n)
+    (0...n).map do |i|
+      group = []
+
+      chars.each_with_index do |char, index|
+        group << char if index % n == i
+      end
+
+      group.join
+    end
+  end
+
+  def letter?
+    !(/[a-zA-Z]/ =~ self).nil?
   end
 end
 
@@ -45,4 +65,9 @@ class Array
   def gcd
     inject(first, :gcd)
   end
+end
+
+
+def read(file)
+  File.read(file)
 end
