@@ -1,0 +1,75 @@
+                   user     system      total        real
+GF_product_p   8.370000   0.000000   8.370000 (  8.373859)
+GF_product_t   1.200000   0.000000   1.200000 (  1.196613)
+
+                      user     system      total        real
+GF_product_p_02   1.960000   0.000000   1.960000 (  1.961984)
+GF_product_t_02   1.470000   0.000000   1.470000 (  1.472987)
+
+                      user     system      total        real
+GF_product_p_03   1.700000   0.000000   1.700000 (  1.698900)
+GF_product_t_03   1.230000   0.000000   1.230000 (  1.234503)
+
+                      user     system      total        real
+GF_product_p_09   2.540000   0.000000   2.540000 (  2.539675)
+GF_product_t_09   1.350000   0.000000   1.350000 (  1.351156)
+
+                      user     system      total        real
+GF_product_p_0B   2.390000   0.000000   2.390000 (  2.393739)
+GF_product_t_0B   1.470000   0.000000   1.470000 (  1.473042)
+
+                      user     system      total        real
+GF_product_p_0D   2.050000   0.000000   2.050000 (  2.042479)
+GF_product_t_0D   1.470000   0.000000   1.470000 (  1.473403)
+
+                      user     system      total        real
+GF_product_p_0E   2.400000   0.000000   2.400000 (  2.407228)
+GF_product_t_0E   1.480000   0.000000   1.480000 (  1.476261)
+
+                            user     system      total        real
+GF_product_p(a, 0x02)   4.510000   0.000000   4.510000 (  4.509550)
+GF_product_p_02(a)      1.470000   0.000000   1.470000 (  1.473112)
+
+                            user     system      total        real
+GF_product_p(a, 0x03)   5.100000   0.000000   5.100000 (  5.109119)
+GF_product_p_03(a)      1.240000   0.000000   1.240000 (  1.231373)
+
+                            user     system      total        real
+GF_product_p(a, 0x09)   5.950000   0.000000   5.950000 (  5.955233)
+GF_product_p_09(a)      1.350000   0.000000   1.350000 (  1.351913)
+
+                            user     system      total        real
+GF_product_p(a, 0x0B)   6.650000   0.000000   6.650000 (  6.659285)
+GF_product_p_0B(a)      1.480000   0.000000   1.480000 (  1.474843)
+
+                            user     system      total        real
+GF_product_p(a, 0x0D)   6.280000   0.000000   6.280000 (  6.287863)
+GF_product_p_0D(a)      1.480000   0.000000   1.480000 (  1.475540)
+
+                            user     system      total        real
+GF_product_p(a, 0x0E)   6.650000   0.000000   6.650000 (  6.654940)
+GF_product_p_0E(a)      1.470000   0.000000   1.470000 (  1.477218)
+
+                            user     system      total        real
+GF_product_t(a, 0x02)   1.430000   0.000000   1.430000 (  1.432537)
+GF_product_t_02         1.480000   0.000000   1.480000 (  1.475434)
+
+                            user     system      total        real
+GF_product_t(a, 0x03)   1.190000   0.000000   1.190000 (  1.189857)
+GF_product_t_03         1.230000   0.000000   1.230000 (  1.230513)
+
+                            user     system      total        real
+GF_product_t(a, 0x09)   1.310000   0.000000   1.310000 (  1.313499)
+GF_product_t_09         1.350000   0.000000   1.350000 (  1.351587)
+
+                            user     system      total        real
+GF_product_t(a, 0x0B)   1.430000   0.000000   1.430000 (  1.430657)
+GF_product_t_0B         1.480000   0.000000   1.480000 (  1.475989)
+
+                            user     system      total        real
+GF_product_t(a, 0x0D)   1.430000   0.000000   1.430000 (  1.433864)
+GF_product_t_0D         1.470000   0.000000   1.470000 (  1.474622)
+
+                            user     system      total        real
+GF_product_t(a, 0x0E)   1.440000   0.000000   1.440000 (  1.433432)
+GF_product_t_0E         1.470000   0.000000   1.470000 (  1.476851)
