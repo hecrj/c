@@ -1,12 +1,5 @@
 require_relative 'aes'
 
-# We redefine sub_bytes as the identity
-module AES
-  def self.sub_bytes(bytes)
-    bytes
-  end
-end
-
 # We use a random message and a random key
 M = (0...16).map { Random.rand(2**8) }
 K = (0...16).map { Random.rand(2**8) }
@@ -24,12 +17,29 @@ M_ = (0...128).map do |i|
   end
 end
 
+# We check that the statement is not true
+(0...128).each do |i|
+  (0...128).each do |j|
+    raise "Failed with i = #{i} and j = #{j}" if AES.encrypt(M_[i][i], K) ^ AES.encrypt(M_[j][j], K) ^ AES.encrypt(M_[i][j], K) == C
+  end
+end
+
+# We redefine sub_bytes as the identity
+module AES
+  def self.sub_bytes(bytes)
+    bytes
+  end
+end
+
+# Reencrypt the message
+C_ = AES.encrypt(M, K)
+
 # And now we check the statement is true
 (0...128).each do |i|
   (0...128).each do |j|
     next if i == j
-    raise "Failed with i = #{i} and j = #{j}" unless AES.encrypt(M_[i][i], K) ^ AES.encrypt(M_[j][j], K) ^ AES.encrypt(M_[i][j], K) == C
+    raise "Failed with i = #{i} and j = #{j}" unless AES.encrypt(M_[i][i], K) ^ AES.encrypt(M_[j][j], K) ^ AES.encrypt(M_[i][j], K) == C_
   end
 end
 
-puts "Statement holds."
+puts "All OK"
