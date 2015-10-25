@@ -4,7 +4,8 @@ from sys import argv
 _, key_file, encrypted_file = argv
 
 key = open(key_file, 'rb').read()
-cryptogram = open(encrypted_file, 'rb').read()
-cipher = AES.new(key[0:16], AES.MODE_CBC, key[16:32])
+content = open(encrypted_file, 'rb').read()
+iv, cryptogram = content[0:16], content[16:]
+cipher = AES.new(key, AES.MODE_OFB, iv)
 
 print(cipher.decrypt(cryptogram).decode('utf-8'), end='')
