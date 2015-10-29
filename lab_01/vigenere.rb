@@ -25,6 +25,19 @@ module Vigenere
     candidates
   end
 
+  def self.encrypt(message, key)
+    key = key.chars
+
+    message.chars.map do |char|
+      if char.letter?
+        key << key.shift
+        Caesar.encrypt(char, key.last)
+      else
+        char
+      end
+    end.join
+  end
+
   def self.decrypt(message, key)
     key = key.chars
 

@@ -7,6 +7,13 @@ module Caesar
     end
   end
 
+  def self.encrypt(message, key)
+    i = key.ord - ALPHABET[0].ord
+    configuration = ALPHABET[i..-1] + ALPHABET[0...i]
+
+    message.tr(ALPHABET + ALPHABET.upcase, configuration + configuration.upcase)
+  end
+
   def self.decrypt(message, key)
     i = key.ord - ALPHABET[0].ord
     configuration = ALPHABET[i..-1] + ALPHABET[0...i]
