@@ -203,6 +203,6 @@ def GF_invers(a)
     Byte.new(0)
   else
     t = GF_tables()
-    Byte.new(t[:exponential][-t[:logarithmic][a.value]])
+    Byte.new(t[:exponential][-t[:logarithmic][a.value]-1])
   end
 end
