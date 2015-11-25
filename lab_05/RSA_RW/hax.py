@@ -50,3 +50,6 @@ d = inverse(target.e, euler_n)
 # Generate private key
 private_key = construct((target.n, target.e, d, p, q))
 print(private_key.exportKey().decode('utf-8'))
+
+# To decrypt:
+# openssl rsautl -decrypt -in hector.ramon_RSA_RW.enc -out hector.ramon_RSA_RW.txt -inkey hector.ramon_privkeyRSA_RW.pem
