@@ -21,8 +21,6 @@ func main() {
 	h := sha512.New()
 
 	for true {
-		i = i.Add(i, o)
-
 		m := i.Bytes()
 		m = append(m, make([]byte, 64-len(m))...)
 
@@ -30,10 +28,13 @@ func main() {
 
 		c := hex.EncodeToString(h.Sum(nil))
 
-		if strings.HasPrefix(string(c), p) {
+		if strings.HasPrefix(c, p) {
 			fmt.Println(hex.EncodeToString(m))
 			fmt.Println(c)
 			return
 		}
+
+		i = i.Add(i, o)
+		h.Reset()
 	}
 }
