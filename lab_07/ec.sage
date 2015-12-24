@@ -1,9 +1,28 @@
 import re
 
 def decode_hex(hex):
-    return int('0x' + ''.join(re.sub('\n\s*', '', hex).split(':')), base=16)
+    return int('0x' + ''.join(re.sub('\n\s*\t*', '', hex).split(':')), base=16)
 
-Q = (
+def inverse(a, n):
+    t = 0
+    r = n
+    newt = 1
+    newr = a
+
+    while newr != 0:
+        q = r // newr
+        t, newt = newt, t - q * newt
+        r, newr = newr, r - q * newr
+
+    if r > 1:
+        raise "a is not invertible"
+
+    if t < 0:
+        t = t + n
+
+    return t
+
+Qx, Qy = (
     decode_hex("""6b:fb:ee:c6:9d:e7:2c:66:a6:68:ec:e1:aa:f1:
          a2:64:a3:c9:b2:88:fb:32:d0:59:e9:2c:3e:5d:5b:
          d4:d7:b5:01:48:78:f4:47:9c:13:c8:83:d0:54:55:
@@ -15,9 +34,6 @@ Q = (
 )
 
 q = decode_hex("""00:8c:b9:1e:82:a3:38:6d:28:0f:5d:6f:7e:50:e6:
-                    41:df:15:2f:71:09:ed:54:56:b4:12:b1:da:19:7f:
-                    b7:11:23:ac:d3:a7:29:90:1d:1a:71:87:47:00:13:
-                    31:07:ec:538c:b9:1e:82:a3:38:6d:28:0f:5d:6f:7e:50:e6:
                     41:df:15:2f:71:09:ed:54:56:b4:12:b1:da:19:7f:
                     b7:11:23:ac:d3:a7:29:90:1d:1a:71:87:47:00:13:
                     31:07:ec:53""")
@@ -32,7 +48,7 @@ b = decode_hex("""04:a8:c7:dd:22:ce:28:26:8b:39:b5:54:16:f0:44:
                     62:d5:7c:b4:39:02:95:db:c9:94:3a:b7:86:96:fa:
                     50:4c:11""")
 
-P = (
+Px, Py = (
     decode_hex("""1d:1c:64:f0:68:cf:45:ff:a2:a6:3a:81:b7:c1:
                     3f:6b:88:47:a3:e7:7e:f1:4f:e3:db:7f:ca:fe:0c:
                     bd:10:e8:e8:26:e0:34:36:d6:46:aa:ef:87:b2:e2:
@@ -48,4 +64,57 @@ n = decode_hex("""00:8c:b9:1e:82:a3:38:6d:28:0f:5d:6f:7e:50:e6:
                     04:25:a7:cf:3a:b6:af:6b:7f:c3:10:3b:88:32:02:
                     e9:04:65:65""")
 
-print(Q, q, a, b, P, n)
+
+Zq = Zmod(q)
+E = EllipticCurve(Zq, [a, b])
+
+Q = E([Qx, Qy])
+P = E([Px, Py])
+
+dni = '47894466'
+
+# 1.
+print "1."
+print E
+print "P =", P
+print
+
+
+# a)
+r = int(dni * 8)
+dni_pubkey = r * P
+print "a) Q =", dni_pubkey
+
+# b)
+candidate = int(dni)
+i = 1
+
+while not E.lift_x(candidate, all=True):
+    candidate = int(dni) * 10 ** (int(log(i, 10)) + 1) + i
+    i = i + 1
+
+print "b) Q =", E.lift_x(candidate)
+print "   No es computacionalmente factible calcular la clave privada fácilmente a partir de la pública."
+
+# c)
+import random
+
+k = random.randrange(2, q-1)
+x1, y1, _ = k * P
+
+f1 = int(mod(x1, q))
+f2 = mod(inverse(k, q) * (decode_hex(dni) + f1 * r), q)
+print "c) a: (f1, f2) =", (f1, f2)
+print "   b: No puedo calcular la firma sin la clave privada."
+
+# d)
+print "d) Entiendo que aquí se realizaría el mismo proceso que se realizó con la PS4. Asumiendo que ambas firmas"
+print "   se han obtenido usando una misma k. Pero no he sido capaz de computar la clave privada en el apartado"
+print "   b), así que solo tengo una firma... :("
+
+print
+
+# 2.
+print "2."
+print E
+print "P =", P
